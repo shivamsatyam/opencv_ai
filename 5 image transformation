@@ -1,0 +1,91 @@
+import cv2 as cv
+import numpy as np
+
+img = cv.imread('Photos/cat.jpg')
+cv.imshow('img',img)
+
+"""translation"""
+def translate(img,x,y):
+    dimesion = (img.shape[1],img.shape[0])
+    transMatrix = np.float32([[1,0,x],[0,1,y]])
+
+    return cv.warpAffine(img,transMatrix,dimesion)
+
+
+# x right
+# y down
+# -x left
+# -y up
+
+# image = translate(img,100,100)
+# cv.imshow('translate',image)
+
+"""rotation"""
+
+def rotate(img,angle,rotPoint=None):
+    width = img.shape[1]
+    height = img.shape[0]
+
+    if rotPoint is None:
+        rotPoint = (width//2,height//2)
+
+    print(rotPoint)
+    rotmatrix = cv.getRotationMatrix2D(rotPoint,angle,1.0) # center , angle,scake
+    dimesion = (width,height)
+
+    return cv.warpAffine(img,rotmatrix,dimesion)
+
+
+# image = rotate(img,45)
+# cv.imshow('rotate',image)
+
+
+
+"""flip"""
+
+flip = cv.flip(img,0) # vertical flip
+# flip = cv.flip(img,1) # horizontal flip
+cv.imshow('flip',flip)
+
+cv.waitKey(0)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
